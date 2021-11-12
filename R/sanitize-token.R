@@ -25,6 +25,10 @@
 
 #' @export
 sanitize_token <- function(token) {
+  if (Sys.getenv("REDCAP_BYPASS_SANITIZE_TOKEN") != "") {
+     return(token)
+  }
+
   pattern <- "^([0-9A-Fa-f]{32})(?:\\n)?$"
 
   if (is.na(token)) {
